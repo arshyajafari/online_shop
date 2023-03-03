@@ -16,7 +16,7 @@ export const ProductCard: React.FC<props> = ({ item, addToCartHandler }) => {
   return (
     <Container>
       <div className="w-full shadow-lg">
-        <img src={item.image} alt={item.title} className="rounded-t-lg" />
+        <img src={item.image} alt={item.title} className="w-full rounded-t-lg" />
         <div className="p-6">
           <h5 className="mb-2 text-xl font-medium text-neutral-700 dark:text-neutral-600">
             {item.title}
@@ -24,17 +24,19 @@ export const ProductCard: React.FC<props> = ({ item, addToCartHandler }) => {
           <p className="mb-4 text-base text-gray-500 dark:text-gray-400">
             {item.description}
           </p>
-          <h6 className="mb-2 text-lg font-medium leading-tight text-neutral-600 dark:text-neutral-600">
-            ${item.price}
-          </h6>
+          <div className="flex justify-between items-center">
+            <span className="text-lg font-medium leading-tight text-neutral-600 dark:text-neutral-600">
+              price: ${item.price}
+            </span>
+            <button
+              type="button"
+              className="w-1/4 rounded-lg bg-sky-600 px-6 py-2.5 text-sm font-medium text-white uppercase leading-normal hover:bg-sky-700"
+              onClick={() => addToCartHandler(item)}
+            >
+              Add to Cart
+            </button>
+          </div>
         </div>
-        <button
-          type="button"
-          className="w-full rounded-b-lg bg-sky-600 px-6 pt-2.5 pb-2 text-sm font-medium text-white uppercase leading-normal"
-          onClick={() => addToCartHandler(item)}
-        >
-          Add to Cart
-        </button>
       </div>
     </Container>
   );
