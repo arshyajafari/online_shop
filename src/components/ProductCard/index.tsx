@@ -15,7 +15,7 @@ type props = {
 export const ProductCard: React.FC<props> = ({ item, addToCartHandler }) => {
   return (
     <Container>
-      <div className="w-full h-full shadow-xl rounded-xl">
+      <div className="w-full h-full border-solid border-2 border-sky-200 rounded-xl shadow-md">
         <img
           src={item.image}
           alt={item.title}
