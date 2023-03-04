@@ -47,7 +47,7 @@ export const DisplayProducts = () => {
     <Container>
       <div className="grid md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 mb-4">
         {data?.map((item) => (
-          <div key={item.id} className="mt-4 mx-4">
+          <div key={item.id} className="mt-4 mx-4 sm:mx-2">
             <ProductCard item={item} addToCartHandler={addToCartHandler} />
           </div>
         ))}
