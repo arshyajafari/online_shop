@@ -1,9 +1,11 @@
 // hooks
-import { useState } from "react";
 import { useQuery } from "react-query";
 
 // components
 import { ProductCard } from "../../components/ProductCard";
+
+// requests
+import { getProductsRequest } from "../../api/request";
 
 // styled components
 import { Container } from "./Products.style";
@@ -22,7 +24,7 @@ export type ProductItemType = {
 export const DisplayProducts = () => {
   // get products data request method
   const getProductsData = async (): Promise<ProductItemType[]> =>
-    await (await fetch("https://fakestoreapi.com/products")).json();
+    await (await fetch(getProductsRequest)).json();
 
   // using query hook
   const { data, isLoading, error } = useQuery<ProductItemType[]>(
