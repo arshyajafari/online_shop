@@ -1,14 +1,17 @@
-// components
-import { DisplayProducts } from "./pages/products";
+// react router dom package
+import { BrowserRouter } from "react-router-dom";
+
+// route file
+import { RoutesCM } from "./routes";
 
 // css file
 import "./App.css";
 
 const App = () => {
   return (
-    <div>
-      <DisplayProducts />
-    </div>
+    <BrowserRouter>
+      <RoutesCM />
+    </BrowserRouter>
   );
 };
 
