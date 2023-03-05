@@ -2,6 +2,7 @@
 import { useQuery } from "react-query";
 
 // components
+import { NavigationCM } from "../../components/Navigation";
 import { ProductCard } from "../../components/ProductCard";
 
 // requests
@@ -47,6 +48,7 @@ export const DisplayProducts = () => {
 
   return (
     <Container>
+      <NavigationCM />
       <div className="grid md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 mb-4">
         {data?.map((item) => (
           <div key={item.id} className="mt-4 mx-4 sm:mx-2">
