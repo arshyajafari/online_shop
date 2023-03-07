@@ -2,7 +2,7 @@
 import { createContext, useContext, ReactNode } from "react";
 
 // customize hook
-import useLocalStorage from "../hooks/useLocalStorage";
+import { useLocalStorage } from "../hook/useLocalStorage";
 
 // types
 type ShoppingCartProviderProps = {
