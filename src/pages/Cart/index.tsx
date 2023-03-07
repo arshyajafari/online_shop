@@ -1,5 +1,5 @@
 // components
-import { NavigationCM } from "../../components/Navigation";
+import { NavbarCM } from "../../components/Navbar";
 import { TableCM } from "../../components/Table";
 
 // styled components
@@ -8,7 +8,7 @@ import { Container } from "./ShoppingCart.style";
 export const DisplayShoppingCart = () => {
   return (
     <Container>
-      <NavigationCM />
+      <NavbarCM />
       <TableCM />
     </Container>
   );
