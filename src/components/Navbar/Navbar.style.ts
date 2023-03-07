@@ -15,20 +15,43 @@ export const Container = styled.div`
 
   & div:first-child {
     @media (max-width: 600px) {
-      display: none;
+      & img {
+        width: 40px;
+        height: 40px;
+      }
+      & span {
+        font-size: 14px;
+        padding: 0px 0px 0px 8px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      & span {
+        display: none;
+      }
     }
   }
+
   & div:nth-child(2) {
+    padding: 0px 60px 0px 0px;
+
     @media (max-width: 600px) {
-      width: 130px;
+      width: 190px;
       height: 60px;
+      padding: 0px 40px 0px 0px;
 
       & img {
         width: 100%;
         height: 100%;
       }
     }
+
+    @media (max-width: 380px) {
+      width: 110px;
+      padding: 0px 10px 0px 0px;
+    }
   }
+
   & div:last-child button {
     @media (max-width: 600px) {
       width: 28px;
