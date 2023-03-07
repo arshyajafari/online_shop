@@ -8,11 +8,11 @@ import { ProductItemType } from "../../pages/products";
 import { Container } from "./Card.style";
 
 // type
-type props = {
+type Props = {
   items: ProductItemType;
 };
 
-export const ProductCard: React.FC<props> = ({ items }) => {
+export const ProductCard: React.FC<Props> = ({ items }) => {
   // using increment item from shopping context
   const { increaseCartQuantity } = useShoppingCart();
 
