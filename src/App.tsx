@@ -1,6 +1,9 @@
 // react router dom package
 import { BrowserRouter } from "react-router-dom";
 
+// context provider
+import { ShoppingCartProvider } from "./store/useShoppingContext";
+
 // route file
 import { RoutesCM } from "./routes";
 
@@ -9,9 +12,11 @@ import "./App.css";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <RoutesCM />
-    </BrowserRouter>
+    <ShoppingCartProvider>
+      <BrowserRouter>
+        <RoutesCM />
+      </BrowserRouter>
+    </ShoppingCartProvider>
   );
 };
 
