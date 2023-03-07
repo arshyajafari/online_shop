@@ -33,15 +33,6 @@ export const DisplayProducts = () => {
     getProductsData
   );
 
-  // get total products in cart method
-  const getTotalItems = () => null;
-
-  // add product to cart method
-  const addToCartHandler = () => null;
-
-  // remove product from cart method
-  const removeFromCartHandler = () => null;
-
   if (isLoading) console.log("Loading");
 
   if (error) console.log("Error");
