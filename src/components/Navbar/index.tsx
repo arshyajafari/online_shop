@@ -7,6 +7,9 @@ import { useShoppingCart } from "../../store/useShoppingContext";
 // styled components
 import { Container } from "./Navbar.style";
 
+// import logo image
+import logo from "../../assets/logo.png";
+
 export const NavbarCM = () => {
   // using navigate
   const navigate = useNavigate();
@@ -26,9 +29,9 @@ export const NavbarCM = () => {
       </div>
       <div>
         <img
-          src="logo"
-          alt="logo"
-          className="w-64 h-full flex justify-center items-center border-solid border-2 border-gray-300 m-0 py-4 object-contain hover:border-gray-400 cursor-pointer"
+          src={logo}
+          alt="site logo"
+          className="w-64 h-24 flex justify-center items-center border-solid border-2 border-gray-300 rounded-lg m-0 p-0 object-cover hover:border-gray-400 cursor-pointer"
           onClick={() => navigate("/")}
         />
       </div>
