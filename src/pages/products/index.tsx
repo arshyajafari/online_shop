@@ -48,7 +48,7 @@ export const DisplayProducts = () => {
       <div>
         {data?.map((item) => (
           <div key={item.id}>
-            <ProductCard item={item} addToCartHandler={addToCartHandler} />
+            <ProductCard items={item} />
           </div>
         ))}
       </div>
