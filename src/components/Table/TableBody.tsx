@@ -86,7 +86,7 @@ export const TableBody = ({ id, amount, index }: CartItemProps) => {
           </button>
         </div>
       </td>
-      <td className="font-semibold px-6 py-4">{cartItems.price}</td>
+      <td className="font-semibold px-6 py-4">${cartItems.price}</td>
       <td className="font-semibold px-6 py-4">
         ${(amount * cartItems.price).toFixed(2)}
       </td>
