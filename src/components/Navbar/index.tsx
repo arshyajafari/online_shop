@@ -1,14 +1,26 @@
+// react query package
+import { useQuery } from "react-query";
+
 // react router
 import { useNavigate } from "react-router-dom";
 
 // context
 import { useShoppingCart } from "../../store/useShoppingContext";
 
+// request
+import { getUserByIdRequest } from "../../api/request";
+
 // styled components
 import { Container } from "./Navbar.style";
 
 // import logo image
 import logo from "../../assets/logo.png";
+import user from "../../assets/user.svg";
+
+// type
+type UserItemType = {
+  username: string;
+};
 
 export const NavbarCM = () => {
   // using navigate
@@ -17,15 +29,22 @@ export const NavbarCM = () => {
   // using cart quantity
   const { cartQuantity } = useShoppingCart();
 
+  // get user data by id request method
+  const getUserDataById = async (): Promise<UserItemType> =>
+    await (await fetch(getUserByIdRequest)).json();
+
+  // using query hook
+  const { data } = useQuery<UserItemType>("user", getUserDataById);
+
   return (
     <Container>
       <div className="flex justify-center items-center">
         <img
-          src="test"
-          alt="test"
+          src={user}
+          alt="user logo"
           className="w-14 h-14 flex justify-center items-center border-solid border-2 border-gray-300 rounded-full m-0 p-0 object-contain hover:border-gray-400 cursor-pointer"
         />
-        <span className="text-sm pl-3 cursor-pointer">title</span>
+        <span className="text-sm pl-3 cursor-pointer">{data?.username}</span>
       </div>
       <div>
         <img
@@ -38,7 +57,7 @@ export const NavbarCM = () => {
       <div>
         <button
           type="button"
-          className="text-emerald-800 relative"
+          className="text-emerald-700 relative"
           onClick={() => navigate("/cart")}
         >
           <svg

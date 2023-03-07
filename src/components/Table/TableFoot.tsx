@@ -34,7 +34,6 @@ export const TableFoot = () => {
         <td className=""></td>
         <td className=""></td>
         <td className=""></td>
-        <td className=""></td>
         <td className="text-base text-center">
           $
           {cartItems.reduce((total: number, cartItem) => {
@@ -42,6 +41,7 @@ export const TableFoot = () => {
             return total + (item?.price || 0) * cartItem.amount;
           }, 0)}
         </td>
+        <td className=""></td>
       </tr>
     </tfoot>
   );
