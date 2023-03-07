@@ -42,7 +42,7 @@ export const DisplayProducts = () => {
       <NavbarCM />
       <div className="grid md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 mb-4">
         {data?.map((item) => (
-          <div key={item.id}>
+          <div key={item.id} className="lg:mx-4 md:mx-3 sm:mx-2 my-2">
             <ProductCard items={item} />
           </div>
         ))}
