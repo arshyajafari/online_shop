@@ -1,3 +1,6 @@
+// react hook
+import React from "react";
+
 // context
 import { useShoppingCart } from "../../store/useShoppingContext";
 

@@ -1,5 +1,5 @@
 // react package
-import { createContext, useContext, ReactNode } from "react";
+import React, { createContext, useContext, ReactNode } from "react";
 
 // customize hook
 import { useLocalStorage } from "../hook/useLocalStorage";

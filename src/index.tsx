@@ -1,6 +1,10 @@
-// react packages
+// react package
 import React from "react";
+
+// react dom package
 import ReactDOM from "react-dom/client";
+
+// react query package
 import { QueryClient, QueryClientProvider } from "react-query";
 
 // component

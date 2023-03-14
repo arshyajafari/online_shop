@@ -1,3 +1,6 @@
+// react hook
+import React from "react";
+
 export const TableHead = () => {
   return (
     <thead className="bg-gray-400 text-gray-700 text-xs uppercase">

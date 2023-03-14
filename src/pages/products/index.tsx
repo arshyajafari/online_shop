@@ -1,5 +1,7 @@
 // hooks
-import { Fragment, useCallback, useEffect, useState } from "react";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
+
+// react query package
 import { useQuery } from "react-query";
 
 // components

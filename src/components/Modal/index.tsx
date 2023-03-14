@@ -1,5 +1,7 @@
 // react package
-import { Fragment } from "react";
+import React, { Fragment } from "react";
+
+// react query package
 import { useQuery } from "react-query";
 
 // react dom package
@@ -90,6 +92,6 @@ export const Modal: React.FC<Props> = ({ show, onClose }) => {
         </ModalContainer>
       </Backdrop>
     </Fragment>,
-    document.getElementById("modal")!
+    document.getElementById("modal") as HTMLElement
   );
 };

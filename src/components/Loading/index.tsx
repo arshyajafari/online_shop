@@ -1,3 +1,7 @@
+// react hook
+import React from "react";
+
+// react dom package
 import { createPortal } from "react-dom";
 
 // styled components
@@ -27,6 +31,6 @@ export const LoadingCM = () => {
         </svg>
       </div>
     </Container>,
-    document.getElementById("loading")!
+    document.getElementById("loading") as HTMLElement
   );
 };
