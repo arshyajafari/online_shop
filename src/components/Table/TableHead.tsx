@@ -6,7 +6,7 @@ export const TableHead = () => {
     <thead className="bg-gray-400 text-gray-700 text-xs uppercase">
       <tr className="text-center">
         <th scope="col" className="px-6 py-3">
-          Number
+          #
         </th>
         <th scope="col" className="px-6 py-3">
           Image

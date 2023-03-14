@@ -30,19 +30,19 @@ export const TableFoot = () => {
   return (
     <tfoot className="bg-gray-700 text-gray-400 text-xs uppercase">
       <tr className="text-white font-semibold">
-        <th scope="row" className="text-base text-center px-5 py-4">
-          Total
-        </th>
+        <td className="text-base text-center px-5 py-4">Total</td>
         <td className=""></td>
         <td className=""></td>
         <td className=""></td>
         <td className=""></td>
         <td className="text-base text-center">
           $
-          {cartItems.reduce((total: number, cartItem) => {
-            const item = data?.find((i) => i.id === cartItem.id);
-            return total + (item?.price || 0) * cartItem.amount;
-          }, 0)}
+          {cartItems
+            .reduce((total: number, cartItem) => {
+              const item = data?.find((i) => i.id === cartItem.id);
+              return total + (item?.price || 0) * cartItem.amount;
+            }, 0)
+            .toFixed(2)}
         </td>
         <td className=""></td>
       </tr>

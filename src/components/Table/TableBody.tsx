@@ -13,6 +13,9 @@ import { getProductsRequest } from "../../api/request";
 // import product item type
 import { ProductItemType } from "../../pages/products";
 
+// styled components
+import { StyledTRTable, StyledPriceTR } from "./Table.style";
+
 // type
 type CartItemProps = {
   id: number;
@@ -41,7 +44,7 @@ export const TableBody = ({ id, amount, index }: CartItemProps) => {
   if (!cartItems) return null;
 
   return (
-    <tr className="bg-gray-200 text-center border-b hover:bg-gray-300">
+    <StyledTRTable className="w-full bg-gray-200 text-center border-b hover:bg-gray-300">
       <td className="w-20">{index + 1}</td>
       <td className="w-32 p-4">
         <img src={cartItems.image} alt={cartItems.title} />
@@ -89,10 +92,18 @@ export const TableBody = ({ id, amount, index }: CartItemProps) => {
           </button>
         </div>
       </td>
-      <td className="font-semibold px-6 py-4">${cartItems.price}</td>
+      <td className="font-semibold px-6 py-4">${cartItems.price.toFixed(2)}</td>
       <td className="font-semibold px-6 py-4">
         ${(amount * cartItems.price).toFixed(2)}
       </td>
+      <StyledPriceTR>
+        <td className="font-semibold px-6 py-4">
+          price: ${cartItems.price.toFixed(2)}
+        </td>
+        <td className="font-semibold px-6 py-4">
+          total: ${(amount * cartItems.price).toFixed(2)}
+        </td>
+      </StyledPriceTR>
       <td className="px-4 py-4">
         <a
           href="#!"
@@ -115,6 +126,6 @@ export const TableBody = ({ id, amount, index }: CartItemProps) => {
           </svg>
         </a>
       </td>
-    </tr>
+    </StyledTRTable>
   );
 };
