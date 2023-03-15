@@ -2,7 +2,9 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 98%;
+  border-radius: 8px;
   margin: 30px auto 0px;
+  overflow-x: hidden;
 
   @media (max-width: 710px) {
     margin: 30px auto;
