@@ -5,8 +5,8 @@ import React, { Fragment, useCallback, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 
 // components
-import { NavbarCM } from "../../components/Navbar";
-import { ProductCard } from "../../components/ProductCard";
+import NavbarCM from "../../components/Navbar";
+import ProductCard from "../../components/ProductCard";
 
 // requests
 import { getProductsRequest, getCategoriesRequest } from "../../api/request";
@@ -35,10 +35,13 @@ export const DisplayProducts = () => {
   const [searchValue, setSearchValue] = useState("");
 
   // get products category data request method
-  const getProductsCategoryData = async () =>
-    await fetch(getCategoriesRequest)
-      .then((res) => res.json())
-      .then((res) => setCategoriesData(res));
+  const getProductsCategoryData = useCallback(
+    async () =>
+      await fetch(getCategoriesRequest)
+        .then((res) => res.json())
+        .then((res) => setCategoriesData(res)),
+    []
+  );
 
   // get products data request method
   const getProductsData = useCallback(
@@ -60,7 +63,7 @@ export const DisplayProducts = () => {
   useEffect(() => {
     getProductsData();
     getProductsCategoryData();
-  }, [getProductsData]);
+  }, [getProductsCategoryData, getProductsData]);
 
   return (
     <Container>

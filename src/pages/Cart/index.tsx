@@ -2,7 +2,7 @@
 import React from "react";
 
 // components
-import { NavbarCM } from "../../components/Navbar";
+import NavbarCM from "../../components/Navbar";
 import { TableCM } from "../../components/Table";
 
 // styled components
