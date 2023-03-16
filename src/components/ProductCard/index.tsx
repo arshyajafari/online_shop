@@ -1,5 +1,5 @@
 // react hook
-import React from "react";
+import React, { FC, memo } from "react";
 
 // context
 import { useShoppingCart } from "../../store/useShoppingContext";
@@ -15,7 +15,7 @@ type Props = {
   items: ProductItemType;
 };
 
-export const ProductCard: React.FC<Props> = ({ items }) => {
+const ProductCard: FC<Props> = ({ items }) => {
   // using increment item from shopping context
   const { increaseCartQuantity } = useShoppingCart();
 
@@ -51,3 +51,5 @@ export const ProductCard: React.FC<Props> = ({ items }) => {
     </Container>
   );
 };
+
+export default memo(ProductCard);

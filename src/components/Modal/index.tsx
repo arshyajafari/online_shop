@@ -1,5 +1,5 @@
 // react package
-import React, { Fragment } from "react";
+import React, { Fragment, FC, useCallback, memo } from "react";
 
 // react query package
 import { useQuery } from "react-query";
@@ -25,10 +25,13 @@ type UserItemType = {
   address: { city: string; street: string; number: number; zipcode: string };
 };
 
-export const Modal: React.FC<Props> = ({ show, onClose }) => {
+const Modal: FC<Props> = ({ show, onClose }) => {
   // get user data by id request method
-  const getUserDataById = async (): Promise<UserItemType> =>
-    await (await fetch(getUserByIdRequest)).json();
+  const getUserDataById = useCallback(
+    async (): Promise<UserItemType> =>
+      await (await fetch(getUserByIdRequest)).json(),
+    []
+  );
 
   // using query hook
   const { data } = useQuery<UserItemType>("user", getUserDataById);
@@ -95,3 +98,5 @@ export const Modal: React.FC<Props> = ({ show, onClose }) => {
     document.getElementById("modal") as HTMLElement
   );
 };
+
+export default memo(Modal);

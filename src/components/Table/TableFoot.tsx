@@ -1,5 +1,5 @@
 // react hook
-import React from "react";
+import React, { useCallback, useMemo, memo } from "react";
 
 // react query package
 import { useQuery } from "react-query";
@@ -13,13 +13,16 @@ import { getProductsRequest } from "../../api/request";
 // import product item type
 import { ProductItemType } from "../../pages/products";
 
-export const TableFoot = () => {
+const TableFoot = () => {
   // using items in cart
   const { cartItems } = useShoppingCart();
 
   // get product data
-  const getProductDataById = async (): Promise<ProductItemType[]> =>
-    await (await fetch(getProductsRequest)).json();
+  const getProductDataById = useCallback(
+    async (): Promise<ProductItemType[]> =>
+      await (await fetch(getProductsRequest)).json(),
+    []
+  );
 
   // save product data
   const { data } = useQuery<ProductItemType[]>(
@@ -37,15 +40,21 @@ export const TableFoot = () => {
         <td className=""></td>
         <td className="text-base text-center">
           $
-          {cartItems
-            .reduce((total: number, cartItem) => {
-              const item = data?.find((i) => i.id === cartItem.id);
-              return total + (item?.price || 0) * cartItem.amount;
-            }, 0)
-            .toFixed(2)}
+          {useMemo(
+            () =>
+              cartItems
+                .reduce((total: number, cartItem) => {
+                  const item = data?.find((i) => i.id === cartItem.id);
+                  return total + (item?.price || 0) * cartItem.amount;
+                }, 0)
+                .toFixed(2),
+            [cartItems, data]
+          )}
         </td>
         <td className=""></td>
       </tr>
     </tfoot>
   );
 };
+
+export default memo(TableFoot);

@@ -1,5 +1,5 @@
 // react hook
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useCallback, memo } from "react";
 
 // react query package
 import { useQuery } from "react-query";
@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useShoppingCart } from "../../store/useShoppingContext";
 
 // components
-import { Modal } from "../Modal";
+import Modal from "../Modal";
 
 // request
 import { getUserByIdRequest } from "../../api/request";
@@ -28,7 +28,7 @@ type UserItemType = {
   name: { firstname: string };
 };
 
-export const NavbarCM = () => {
+const NavbarCM = () => {
   // using navigate
   const navigate = useNavigate();
 
@@ -36,8 +36,11 @@ export const NavbarCM = () => {
   const { cartQuantity } = useShoppingCart();
 
   // get user data by id request method
-  const getUserDataById = async (): Promise<UserItemType> =>
-    await (await fetch(getUserByIdRequest)).json();
+  const getUserDataById = useCallback(
+    async (): Promise<UserItemType> =>
+      await (await fetch(getUserByIdRequest)).json(),
+    []
+  );
 
   // using query hook
   const { data } = useQuery<UserItemType>("user", getUserDataById);
@@ -46,7 +49,10 @@ export const NavbarCM = () => {
   const [showModal, setShowModal] = useState(false);
 
   // show and hide modal method
-  const showModalHandler = () => setShowModal((state) => !state);
+  const showModalHandler = useCallback(
+    () => setShowModal((state) => !state),
+    []
+  );
 
   return (
     <Fragment>
@@ -106,3 +112,5 @@ export const NavbarCM = () => {
     </Fragment>
   );
 };
+
+export default memo(NavbarCM);

@@ -6,8 +6,8 @@ import { useShoppingCart } from "../../store/useShoppingContext";
 
 // components
 import { TableHead } from "./TableHead";
-import { TableBody } from "./TableBody";
-import { TableFoot } from "./TableFoot";
+import TableBody from "./TableBody";
+import TableFoot from "./TableFoot";
 
 // styled components
 import { Container } from "./Table.style";
@@ -23,7 +23,7 @@ export const TableCM = () => {
         <tbody className="text-black">
           {cartItems.length > 0 ? (
             cartItems?.map((items, index) => (
-              <TableBody key={items.id} {...items} index={index} />
+              <TableBody key={index} {...items} countItem={index} />
             ))
           ) : (
             <tr className="w-full bg-gray-200 text-left text-base border-b">

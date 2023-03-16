@@ -32,6 +32,14 @@ export const Container = styled.div`
 `;
 
 export const StyledTRTable = styled.tr`
+  border-bottom: 1px solid #acacac;
+
+  & img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+  }
+
   @media (max-width: 710px) {
     display: flex;
     justify-content: center;
@@ -52,20 +60,26 @@ export const StyledTRTable = styled.tr`
     }
 
     img {
-      width: 40%;
+      width: 260px;
+      height: 260px;
+      object-fit: contain;
       margin: 0px auto;
     }
   }
 `;
 
-export const StyledPriceTR = styled.tr`
+export const StyledPriceTD = styled.td`
   width: 100%;
   display: none;
 
   @media (max-width: 710px) {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: block;
+
+    tr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
     td:first-child {
       display: block;

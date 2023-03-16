@@ -1,5 +1,5 @@
 // react hook
-import React from "react";
+import React, { useCallback, memo } from "react";
 
 // react query package
 import { useQuery } from "react-query";
@@ -14,23 +14,26 @@ import { getProductsRequest } from "../../api/request";
 import { ProductItemType } from "../../pages/products";
 
 // styled components
-import { StyledTRTable, StyledPriceTR } from "./Table.style";
+import { StyledTRTable, StyledPriceTD } from "./Table.style";
 
 // type
 type CartItemProps = {
   id: number;
   amount: number;
-  index: number;
+  countItem: number;
 };
 
-export const TableBody = ({ id, amount, index }: CartItemProps) => {
+const TableBody = ({ id, amount, countItem }: CartItemProps) => {
   // using increment, decrement and remove from cart items
   const { increaseCartQuantity, decreaseCartQuantity, removeFromCart } =
     useShoppingCart();
 
   // get product data
-  const getProductDataById = async (): Promise<ProductItemType[]> =>
-    await (await fetch(getProductsRequest)).json();
+  const getProductDataById = useCallback(
+    async (): Promise<ProductItemType[]> =>
+      await (await fetch(getProductsRequest)).json(),
+    []
+  );
 
   // save product data
   const { data } = useQuery<ProductItemType[]>(
@@ -44,8 +47,8 @@ export const TableBody = ({ id, amount, index }: CartItemProps) => {
   if (!cartItems) return null;
 
   return (
-    <StyledTRTable className="w-full bg-gray-200 text-center border-b hover:bg-gray-300">
-      <td className="w-20">{index + 1}</td>
+    <StyledTRTable className="w-full bg-gray-200 text-center hover:bg-gray-300">
+      <td className="w-20">{countItem + 1}</td>
       <td className="w-32 p-4">
         <img src={cartItems.image} alt={cartItems.title} />
       </td>
@@ -96,14 +99,20 @@ export const TableBody = ({ id, amount, index }: CartItemProps) => {
       <td className="font-semibold px-6 py-4">
         ${(amount * cartItems.price).toFixed(2)}
       </td>
-      <StyledPriceTR>
-        <td className="font-semibold px-6 py-4">
-          price: ${cartItems.price.toFixed(2)}
-        </td>
-        <td className="font-semibold px-6 py-4">
-          total: ${(amount * cartItems.price).toFixed(2)}
-        </td>
-      </StyledPriceTR>
+      <StyledPriceTD colSpan={2}>
+        <table className="w-full">
+          <tbody>
+            <tr className="w-full">
+              <td className="font-semibold px-6 py-4">
+                price: ${cartItems.price.toFixed(2)}
+              </td>
+              <td className="font-semibold px-6 py-4">
+                total: ${(amount * cartItems.price).toFixed(2)}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </StyledPriceTD>
       <td className="px-4 py-4">
         <a
           href="#!"
@@ -129,3 +138,5 @@ export const TableBody = ({ id, amount, index }: CartItemProps) => {
     </StyledTRTable>
   );
 };
+
+export default memo(TableBody);
