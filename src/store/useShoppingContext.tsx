@@ -1,5 +1,11 @@
 // react package
-import React, { createContext, useContext, ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  ReactNode,
+  useCallback,
+  useMemo,
+} from "react";
 
 // customize hook
 import { useLocalStorage } from "../hook/useLocalStorage";
@@ -44,49 +50,70 @@ export const ShoppingCartProvider = ({
   );
 
   // get item quantity
-  const getItemQuantity = (id: number) =>
-    cartItems.find((item) => item.id === id)?.amount || 0;
+  const getItemQuantity = useCallback(
+    (id: number) => cartItems.find((item) => item.id === id)?.amount || 0,
+    [cartItems]
+  );
 
   // increment item to cart
-  const increaseCartQuantity = (id: number) => {
-    setCartItems((items) => {
-      const isItemInCart = items.find((item) => item.id === id);
-      if (isItemInCart)
-        return items.map((item) => {
-          if (item.id === id) return { ...item, amount: item.amount + 1 };
-          else return item;
-        });
-      return [...items, { id, amount: 1 }];
-    });
-  };
+  const increaseCartQuantity = useCallback(
+    (id: number) => {
+      setCartItems((items) => {
+        const isItemInCart = items.find((item) => item.id === id);
+        if (isItemInCart)
+          return items.map((item) => {
+            if (item.id === id) return { ...item, amount: item.amount + 1 };
+            else return item;
+          });
+        return [...items, { id, amount: 1 }];
+      });
+    },
+    [setCartItems]
+  );
 
   // decrement item from cart
-  const decreaseCartQuantity = (id: number) =>
-    setCartItems((items) => {
-      const isItemInCart = items.find((item) => item.id === id)?.amount;
-      if (isItemInCart === 1) return items.filter((item) => item.id !== id);
-      else
-        return items.map((item) => {
-          if (item.id === id) return { ...item, amount: item.amount - 1 };
-          else return item;
-        });
-    });
+  const decreaseCartQuantity = useCallback(
+    (id: number) =>
+      setCartItems((items) => {
+        const isItemInCart = items.find((item) => item.id === id)?.amount;
+        if (isItemInCart === 1) return items.filter((item) => item.id !== id);
+        else
+          return items.map((item) => {
+            if (item.id === id) return { ...item, amount: item.amount - 1 };
+            else return item;
+          });
+      }),
+    [setCartItems]
+  );
 
   // remove item from cart
-  const removeFromCart = (id: number) =>
-    setCartItems((items) => items.filter((item) => item.id !== id));
+  const removeFromCart = useCallback(
+    (id: number) =>
+      setCartItems((items) => items.filter((item) => item.id !== id)),
+    [setCartItems]
+  );
+
+  // using useMemo
+  const values = useMemo(() => {
+    return {
+      getItemQuantity,
+      increaseCartQuantity,
+      decreaseCartQuantity,
+      removeFromCart,
+      cartQuantity,
+      cartItems,
+    };
+  }, [
+    cartItems,
+    cartQuantity,
+    decreaseCartQuantity,
+    getItemQuantity,
+    increaseCartQuantity,
+    removeFromCart,
+  ]);
 
   return (
-    <ShoppingCartContext.Provider
-      value={{
-        getItemQuantity,
-        increaseCartQuantity,
-        decreaseCartQuantity,
-        removeFromCart,
-        cartQuantity,
-        cartItems,
-      }}
-    >
+    <ShoppingCartContext.Provider value={values}>
       {children}
     </ShoppingCartContext.Provider>
   );
