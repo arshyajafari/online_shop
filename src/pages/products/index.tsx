@@ -51,14 +51,10 @@ export const DisplayProducts = () => {
   );
 
   // using query hook
-  const { data, isLoading, error } = useQuery<ProductItemType[]>(
+  const { data, isLoading } = useQuery<ProductItemType[]>(
     "products",
     getProductsData
   );
-
-  if (isLoading) console.log("Loading");
-
-  if (error) console.log("Error");
 
   useEffect(() => {
     getProductsData();
