@@ -1,5 +1,5 @@
 // react hook
-import React, { useCallback, useMemo, memo } from "react";
+import React, { FC, useCallback, useMemo, memo } from "react";
 
 // react query package
 import { useQuery } from "react-query";
@@ -13,7 +13,12 @@ import { getProductsRequest } from "../../api/request";
 // import product item type
 import { ProductItemType } from "../../pages/products";
 
-const TableFoot = () => {
+// table foot props
+type DiscountCodeProps = {
+  discountStatus: string;
+};
+
+const TableFoot: FC<DiscountCodeProps> = (props) => {
   // using items in cart
   const { cartItems } = useShoppingCart();
 
@@ -30,6 +35,22 @@ const TableFoot = () => {
     getProductDataById
   );
 
+  // get total price
+  const getTotalPriceValue = useMemo(() => {
+    const totalPrice = +cartItems
+      .reduce((total: number, cartItem) => {
+        const item = data?.find((i) => i.id === cartItem.id);
+        return total + (item?.price || 0) * cartItem.amount;
+      }, 0)
+      .toFixed(2);
+
+    if (props.discountStatus === "true") {
+      return totalPrice - totalPrice * 0.1;
+    } else {
+      return totalPrice;
+    }
+  }, [cartItems, data, props.discountStatus]);
+
   return (
     <tfoot className="bg-gray-700 text-gray-400 text-xs uppercase">
       <tr className="text-white font-semibold">
@@ -38,19 +59,7 @@ const TableFoot = () => {
         <td className=""></td>
         <td className=""></td>
         <td className=""></td>
-        <td className="text-base text-center">
-          $
-          {useMemo(
-            () =>
-              cartItems
-                .reduce((total: number, cartItem) => {
-                  const item = data?.find((i) => i.id === cartItem.id);
-                  return total + (item?.price || 0) * cartItem.amount;
-                }, 0)
-                .toFixed(2),
-            [cartItems, data]
-          )}
-        </td>
+        <td className="text-base text-center">${getTotalPriceValue}</td>
         <td className=""></td>
       </tr>
     </tfoot>
